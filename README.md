@@ -1,2 +1,2 @@
 # Socio
-Be Pro-active in society
+Be Pro-active in society.
