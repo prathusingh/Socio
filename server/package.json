@@ -1,0 +1,16 @@
+{
+    "name": "socio-server",
+    "version": "0.1.0",
+    "private": true,
+    "main": "server.js",
+    "scripts": {
+        "start": "nodemon server.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "express": "^4.16.4"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.10"
+    }
+}
