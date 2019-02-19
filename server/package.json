@@ -12,6 +12,7 @@
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.13"
   },
   "devDependencies": {
