@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Connect to db
 mongoose
-  .connect(db.mongoURI, { useNewUrlParser: true })
+  .connect(db.mongoURI, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => {
     console.log("DB connected");
   })
