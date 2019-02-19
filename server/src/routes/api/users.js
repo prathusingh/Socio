@@ -1,7 +1,9 @@
 import express from "express";
 import User from "../../models/User";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { errorCodes } from "../../constants/constants";
+import keys from "../../config/keys";
 
 const router = express.Router();
 
@@ -62,7 +64,20 @@ router.post("/login", (req, res) => {
       .compare(password, user.password)
       .then(isMatch => {
         if (isMatch) {
-          res.json({ msg: "passsword matches" });
+          // Define payload for the token
+          const payload = { id: user.id, name: user.name };
+          // Sign token
+          jwt.sign(
+            payload,
+            keys.secretKey,
+            { expiresIn: 3600 },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token
+              });
+            }
+          );
         } else {
           res.json({ error: errorCodes.passwordNotMatches });
         }
