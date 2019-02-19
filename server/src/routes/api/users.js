@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../../models/User";
 import bcrypt from "bcrypt";
+import { errorCodes } from "../../constants/constants";
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.post("/register", (req, res) => {
   // Check whether user exists
   User.findOne({ email }).then(user => {
     if (user) {
-      res.status(400).json("error: email already exists");
+      res.status(400).json({ error: errorCodes.emailExists });
     } else {
       const newUser = new User({
         name,
@@ -39,6 +40,34 @@ router.post("/register", (req, res) => {
         });
       });
     }
+  });
+});
+
+/**
+ * @route POST api/users/login
+ * @desc Login user / Returning JWT Token
+ * @access Public
+ */
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  // Check for user
+  User.findOne({ email }).then(user => {
+    if (!user) {
+      res.json({ error: errorCodes.emailNotExists });
+    }
+
+    // Validate password
+    bcrypt
+      .compare(password, user.password)
+      .then(isMatch => {
+        if (isMatch) {
+          res.json({ msg: "passsword matches" });
+        } else {
+          res.json({ error: errorCodes.passwordNotMatches });
+        }
+      })
+      .catch(err => console.log(err));
   });
 });
 
