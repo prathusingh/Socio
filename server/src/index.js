@@ -1,8 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import passport from "passport";
 import db from "./config/keys.js";
 import users from "./routes/api/users";
+import tokenAuthentication from "./config/passport";
 
 const app = express();
 
@@ -18,6 +20,12 @@ mongoose
   .catch(err => {
     console.log(err);
   });
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+tokenAuthentication(passport);
 
 // Use routes
 app.use("/api/users", users);
