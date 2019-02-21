@@ -1,5 +1,5 @@
 export const errorCodes = {
   emailExists: "email already exists",
-  emailNotExists: "email not exists",
-  passwordNotMatches: "password do not matches"
+  incorrectCredentials: "Incorrect email or password",
+  internalError: "Internal error, please try again"
 };

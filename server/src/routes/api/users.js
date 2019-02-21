@@ -2,6 +2,7 @@ import express from "express";
 import User from "../../models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import passport from "passport";
 import { errorCodes } from "../../constants/constants";
 import keys from "../../config/keys";
 
@@ -18,7 +19,7 @@ router.post("/register", (req, res) => {
   // Check whether user exists
   User.findOne({ email }).then(user => {
     if (user) {
-      res.status(400).json({ error: errorCodes.emailExists });
+      res.status(401).json({ error: errorCodes.emailExists });
     } else {
       const newUser = new User({
         name,
@@ -30,7 +31,7 @@ router.post("/register", (req, res) => {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) {
-            throw err;
+            res.status(500).json({ error: errorCodes.internalError });
           }
           newUser.password = hash;
 
@@ -38,7 +39,9 @@ router.post("/register", (req, res) => {
           newUser
             .save()
             .then(user => res.json(user))
-            .catch(err => console.log(err));
+            .catch(err =>
+              res.status(500).json({ error: errorCodes.internalError })
+            );
         });
       });
     }
@@ -56,7 +59,7 @@ router.post("/login", (req, res) => {
   // Check for user
   User.findOne({ email }).then(user => {
     if (!user) {
-      res.json({ error: errorCodes.emailNotExists });
+      res.status(401).json({ error: errorCodes.incorrectCredentials });
     }
 
     // Validate password
@@ -79,11 +82,24 @@ router.post("/login", (req, res) => {
             }
           );
         } else {
-          res.json({ error: errorCodes.passwordNotMatches });
+          res.status(401).json({ error: errorCodes.incorrectCredentials });
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => res.status(500).json({ error: errorCodes.internalError }));
   });
 });
+
+/**
+ * @route GET api/users/profile
+ * @desc Return current user
+ * @access private
+ */
+router.get(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json(req.user);
+  }
+);
 
 export default router;
