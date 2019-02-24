@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import "./Landing.scss";
 
 class Landing extends Component {
   render() {
-    return <div>This block would give info about the app</div>;
+    return (
+      <div className="landing">This block would give info about the app</div>
+    );
   }
 }
 
