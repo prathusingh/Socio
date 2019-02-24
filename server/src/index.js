@@ -1,10 +1,10 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import passport from "passport";
-import db from "./config/keys.js";
-import users from "./routes/api/users";
-import tokenAuthentication from "./config/passport";
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import passport from 'passport';
+import db from './config/keys.js';
+import users from './routes/api/users';
+import tokenAuthentication from './config/passport';
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 mongoose
   .connect(db.mongoURI, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => {
-    console.log("DB connected");
+    console.log('DB connected');
   })
   .catch(err => {
     console.log(err);
@@ -28,7 +28,7 @@ app.use(passport.initialize());
 tokenAuthentication(passport);
 
 // Use routes
-app.use("/api/users", users);
+app.use('/api/users', users);
 
 const port = process.env.PORT || 8000;
 

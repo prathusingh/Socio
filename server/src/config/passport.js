@@ -1,7 +1,7 @@
-import passportJwt from "passport-jwt";
-import mongoose from "mongoose";
-import keys from "./keys";
-import User from "../models/User";
+import passportJwt from 'passport-jwt';
+import mongoose from 'mongoose';
+import keys from './keys';
+import User from '../models/User';
 
 const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;

@@ -9,8 +9,7 @@
     "server": "node --exec babel-node src/index.js",
     "client": "npm start --prefix ../client",
     "dev": "concurrently \"npm run start\" \"npm run client\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "pretty-quick --staged"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Prathu Singh",
   "dependencies": {
