@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import './App.scss';
-import Header from './components/layout/header/Header';
-import Landing from './components/layout/landing/Landing';
-import Footer from './components/layout/footer/Footer';
+import { About } from './components/landing/about/About';
+import { Auth } from './components/landing/auth/Auth';
+import { Footer } from './components/landing/footer/Footer';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
-      <div className='container'>
-        <Header />
-        <Landing />
+      <div className="container">
+        <div className="body">
+          <About />
+          <Auth />
+        </div>
         <Footer />
       </div>
     );
   }
 }
-
-export default App;
