@@ -7,8 +7,8 @@ import { Footer } from './components/landing/footer/Footer';
 export default class App extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="body">
+      <div className="app">
+        <div className="landing">
           <About />
           <Auth />
         </div>
