@@ -12,7 +12,9 @@ export default class App extends Component {
           <About />
           <Auth />
         </div>
-        <Footer />
+        <footer>
+          <Footer />
+        </footer>
       </div>
     );
   }
