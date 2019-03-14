@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
@@ -13,7 +13,7 @@ const Login = ({ values, errors, touched }) => {
         Log in
       </button>
       <section className="Login-extras">
-        <label for="rememberMe">
+        <label>
           <Field
             type="checkbox"
             name="remember"
@@ -23,7 +23,7 @@ const Login = ({ values, errors, touched }) => {
           Remember me
         </label>
         <span>.</span>
-        <a href="#">Forgot passowrd?</a>
+        <a href="/">Forgot passowrd?</a>
       </section>
     </Form>
   );
@@ -44,5 +44,17 @@ export const LoginForm = withFormik({
     password: Yup.string()
       .min(8, 'Please enter password greater than 8 characters')
       .required('Did you forget to add password')
-  })
+  }),
+  handleSubmit(values) {
+    const loggingUser = {
+      email: values.email,
+      password: values.password
+    };
+    fetch('http://localhost:8000/api/users/login', {
+      method: 'POST',
+      body: loggingUser
+    })
+      .then(() => console.log('success'))
+      .catch(err => console.log(err));
+  }
 })(Login);
