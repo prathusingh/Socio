@@ -5,11 +5,15 @@ import passport from 'passport';
 import db from './config/keys.js';
 import users from './routes/api/users';
 import tokenAuthentication from './config/passport';
+import cors from 'cors';
 
 const app = express();
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// use cors
+app.use(cors);
 
 // Connect to db
 mongoose
