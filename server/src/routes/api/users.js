@@ -1,10 +1,10 @@
-import express from "express";
-import User from "../../models/User";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import passport from "passport";
-import { errorCodes } from "../../constants/constants";
-import keys from "../../config/keys";
+import express from 'express';
+import User from '../../models/User';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import passport from 'passport';
+import { errorCodes } from '../../constants/constants';
+import keys from '../../config/keys';
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ const router = express.Router();
  * @desc Register user
  * @access Public
  */
-router.post("/register", (req, res) => {
+router.post('/register', (req, res) => {
   const { name, email, password } = req.body;
 
   // Check whether user exists
@@ -53,7 +53,7 @@ router.post("/register", (req, res) => {
  * @desc Login user / Returning JWT Token
  * @access Public
  */
-router.post("/login", (req, res) => {
+router.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   // Check for user
@@ -77,7 +77,7 @@ router.post("/login", (req, res) => {
             (err, token) => {
               res.json({
                 success: true,
-                token: "Bearer " + token
+                token: 'Bearer ' + token
               });
             }
           );
@@ -95,8 +95,8 @@ router.post("/login", (req, res) => {
  * @access private
  */
 router.get(
-  "/profile",
-  passport.authenticate("jwt", { session: false }),
+  '/profile',
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
     res.json(req.user);
   }

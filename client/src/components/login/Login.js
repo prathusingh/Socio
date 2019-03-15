@@ -1,6 +1,7 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 const Login = ({ values, errors, touched }) => {
   return (
@@ -50,11 +51,10 @@ export const LoginForm = withFormik({
       email: values.email,
       password: values.password
     };
-    fetch('http://localhost:8000/api/users/login', {
-      method: 'POST',
-      body: loggingUser
-    })
-      .then(() => console.log('success'))
+    //console.log(JSON.stringify(loggingUser));
+    axios
+      .post('http://localhost:8000/api/users/login', loggingUser)
+      .then(response => console.log(response))
       .catch(err => console.log(err));
   }
 })(Login);
