@@ -14,9 +14,11 @@ export class Auth extends Component {
               Log in
             </button>
           </Link>
-          <button name="Signup" type="button">
-            Sign up
-          </button>
+          <Link to="/signup">
+            <button name="Signup" type="button">
+              Sign up
+            </button>
+          </Link>
         </div>
       </div>
     );

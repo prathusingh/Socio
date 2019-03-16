@@ -3,58 +3,53 @@ import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 
-const Login = ({ values, errors, touched }) => {
+const Signup = ({ errors, touched }) => {
   return (
-    <Form className="Login">
+    <Form>
+      {touched.name && errors.name && <p>{errors.name}</p>}
+      <Field name="name" type="text" placeholder="Full Name" />
       {touched.email && errors.email && <p>{errors.email}</p>}
       <Field name="email" type="email" placeholder="Email" />
       {touched.password && errors.password && <p>{errors.password}</p>}
       <Field name="password" type="password" placeholder="Password" />
-      <button type="submit" name="login">
-        Log in
+      {touched.repassword && errors.repassword && <p>{errors.repassword}</p>}
+      <Field name="repassword" type="password" placeholder="Reenter Password" />
+      <button type="Submit" name="Signup">
+        Signup
       </button>
-      <section className="Login-extras">
-        <label>
-          <Field
-            type="checkbox"
-            name="remember"
-            id="rememberMe"
-            checked={values.remember}
-          />
-          Remember me
-        </label>
-        <span>.</span>
-        <a href="/">Forgot passowrd?</a>
-      </section>
     </Form>
   );
 };
 
-export const LoginForm = withFormik({
+export const SignupForm = withFormik({
   mapPropsToValues() {
     return {
+      name: '',
       email: '',
       password: '',
-      remember: true
+      repassword: ''
     };
   },
   validationSchema: Yup.object().shape({
+    name: Yup.string().required('Did you forget to enter name'),
     email: Yup.string()
       .email()
       .required('Did you forget to enter email'),
     password: Yup.string()
       .min(8, 'Please enter password greater than 8 characters')
-      .required('Did you forget to enter password')
+      .required('Did you forget to enter password'),
+    repassword: Yup.string()
   }),
   handleSubmit(values) {
-    const loggingUser = {
+    const signingUser = {
+      name: values.name,
       email: values.email,
       password: values.password
     };
 
     axios
-      .post('http://localhost:8000/api/users/login', loggingUser)
+      .post('http://localhost:8000/api/users/register', signingUser)
       .then(response => console.log(response))
       .catch(err => console.log(err));
   }
-})(Login);
+})(Signup);

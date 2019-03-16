@@ -8,6 +8,7 @@ import App from './App';
 import { LoginForm } from './components/login/Login';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
+import { SignupForm } from './components/signup/Signup';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -15,6 +16,7 @@ ReactDOM.render(
       <div>
         <Route exact path="/" component={App} />
         <Route exact path="/login" component={LoginForm} />
+        <Route exact path="/signup" component={SignupForm} />
       </div>
     </Router>
   </Provider>,
