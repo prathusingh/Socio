@@ -18,6 +18,8 @@
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "googleapis": "^38.0.0",
+    "i": "^0.3.6",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.13",
     "passport": "^0.4.0",
