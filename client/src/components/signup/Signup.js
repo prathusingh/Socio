@@ -2,6 +2,9 @@ import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authActions';
+import { bindActionCreators } from 'redux';
 
 const Signup = ({ errors, touched }) => {
   return (
@@ -21,7 +24,7 @@ const Signup = ({ errors, touched }) => {
   );
 };
 
-export const SignupForm = withFormik({
+const formikEnhancer = withFormik({
   mapPropsToValues() {
     return {
       name: '',
@@ -40,16 +43,25 @@ export const SignupForm = withFormik({
       .required('Did you forget to enter password'),
     repassword: Yup.string()
   }),
-  handleSubmit(values) {
+  handleSubmit: (values, { props }) => {
     const signingUser = {
       name: values.name,
       email: values.email,
       password: values.password
     };
 
-    axios
+    props.dispatch(registerUser(signingUser));
+
+    // FIXME: when registering through redux
+    /* axios
       .post('http://localhost:8000/api/users/register', signingUser)
       .then(response => console.log(response))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err)); */
   }
 })(Signup);
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export const SignupForm = connect(mapStateToProps)(formikEnhancer);
