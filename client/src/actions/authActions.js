@@ -18,7 +18,7 @@ export const registerUser = (userData, history) => dispatch => {
 export const loginUser = userData => dispatch => {
   axios
     .post('http://localhost:8000/api/users/login', userData)
-    .then(response => console.log(response))
+    .then(res => console.log(res))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
