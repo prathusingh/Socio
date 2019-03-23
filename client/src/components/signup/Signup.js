@@ -1,14 +1,15 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
-import { bindActionCreators } from 'redux';
+import { PropTypes } from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
-const Signup = ({ errors, touched }) => {
+const Signup = ({ errors, touched, serverErrors }) => {
   return (
     <Form>
+      {serverErrors.error && <p>{serverErrors.error}</p>}
       {touched.name && errors.name && <p>{errors.name}</p>}
       <Field name="name" type="text" placeholder="Full Name" />
       {touched.email && errors.email && <p>{errors.email}</p>}
@@ -49,19 +50,20 @@ const formikEnhancer = withFormik({
       email: values.email,
       password: values.password
     };
-
-    props.dispatch(registerUser(signingUser));
-
-    // FIXME: when registering through redux
-    /* axios
-      .post('http://localhost:8000/api/users/register', signingUser)
-      .then(response => console.log(response))
-      .catch(err => console.log(err)); */
+    props.dispatch(registerUser(signingUser, props.history));
   }
 })(Signup);
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    serverErrors: state.errors
+  };
+};
 
-export const SignupForm = connect(mapStateToProps)(formikEnhancer);
+Signup.propTypes = {
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+export const SignupForm = connect(mapStateToProps)(withRouter(formikEnhancer));
