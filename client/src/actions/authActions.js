@@ -18,7 +18,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // login user
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, history) => dispatch => {
   axios
     .post('http://localhost:8000/api/users/login', userData)
     .then(res => {
@@ -34,6 +34,9 @@ export const loginUser = userData => dispatch => {
 
       // set current user
       dispatch(setCurrentUser(decoded));
+
+      // redirect to current user home page
+      history.push('./feed');
     })
     .catch(err =>
       dispatch({
