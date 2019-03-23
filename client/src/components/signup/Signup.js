@@ -2,9 +2,10 @@ import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions/authActions';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
+
+import { registerUser } from '../../actions/authActions';
 
 const Signup = ({ errors, touched, serverErrors }) => {
   return (
@@ -63,7 +64,7 @@ const mapStateToProps = state => {
 
 Signup.propTypes = {
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  serverErrors: PropTypes.object.isRequired
 };
 
 export const SignupForm = connect(mapStateToProps)(withRouter(formikEnhancer));

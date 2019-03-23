@@ -1,11 +1,16 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
-const Login = ({ values, errors, touched }) => {
+import { loginUser } from '../../actions/authActions';
+
+const Login = ({ values, errors, touched, serverErrors }) => {
   return (
     <Form className="Login">
+      {serverErrors.error && <p>{serverErrors.error}</p>}
       {touched.email && errors.email && <p>{errors.email}</p>}
       <Field name="email" type="email" placeholder="Email" />
       {touched.password && errors.password && <p>{errors.password}</p>}
@@ -30,7 +35,7 @@ const Login = ({ values, errors, touched }) => {
   );
 };
 
-export const LoginForm = withFormik({
+const formikEnhancer = withFormik({
   mapPropsToValues() {
     return {
       email: '',
@@ -46,15 +51,23 @@ export const LoginForm = withFormik({
       .min(8, 'Please enter password greater than 8 characters')
       .required('Did you forget to enter password')
   }),
-  handleSubmit(values) {
+  handleSubmit(values, { props }) {
     const loggingUser = {
       email: values.email,
       password: values.password
     };
-
-    axios
-      .post('http://localhost:8000/api/users/login', loggingUser)
-      .then(response => console.log(response))
-      .catch(err => console.log(err));
+    props.dispatch(loginUser(loggingUser, props.history));
   }
 })(Login);
+
+const mapStateToProps = state => {
+  return {
+    serverErrors: state.errors
+  };
+};
+
+Login.propTypes = {
+  serverErrors: PropTypes.object.isRequired
+};
+
+export const LoginForm = connect(mapStateToProps)(withRouter(formikEnhancer));
