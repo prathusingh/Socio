@@ -2,6 +2,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { GET_ERRORS } from './types';
 import { SET_CURRENT_USER } from './types';
+import { LOGOUT_CURRENT_USER } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
 // register user
@@ -51,5 +52,12 @@ export const setCurrentUser = decodedToken => {
   return {
     type: SET_CURRENT_USER,
     payload: decodedToken
+  };
+};
+
+// logout
+export const logoutUser = () => {
+  return {
+    type: LOGOUT_CURRENT_USER
   };
 };
