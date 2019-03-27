@@ -10,6 +10,7 @@ import App from './App';
 import { LoginForm } from './components/login/Login';
 import { SignupForm } from './components/signup/Signup';
 import Feed from './components/feed/Feed';
+import { ForgotPasswordForm } from './components/forgot-password/ForgotPassword';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/signup" component={SignupForm} />
         <Route exact path="/feed" component={Feed} />
+        <Route exact path="/forgotpassword" component={ForgotPasswordForm} />
       </div>
     </Router>
   </Provider>,

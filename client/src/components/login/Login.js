@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { loginUser } from '../../actions/authActions';
 
@@ -29,7 +30,9 @@ const Login = ({ values, errors, touched, serverErrors }) => {
           Remember me
         </label>
         <span>.</span>
-        <a href="/">Forgot passowrd?</a>
+        <Link to="/forgotpassword">
+          <span>Forgot password?</span>
+        </Link>
       </section>
     </Form>
   );

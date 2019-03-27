@@ -61,3 +61,15 @@ export const logoutUser = () => {
     type: LOGOUT_CURRENT_USER
   };
 };
+
+export const forgotPassword = userData => dispatch => {
+  axios
+    .post('http://localhost:8000/api/users/forgotpassword', userData)
+    .then()
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};

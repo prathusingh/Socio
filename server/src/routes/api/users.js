@@ -102,4 +102,20 @@ router.get(
   }
 );
 
+/**
+ * @route GET api/users/forgotpassword
+ * @desc send reset password email
+ * @access public
+ */
+router.post('/forgotpassword', (req, res) => {
+  const { email } = req.body;
+
+  // Check for user
+  User.findOne({ email }).then(user => {
+    if (!user) {
+      res.status(401).json({ error: errorCodes.emailNotExists });
+    }
+  });
+});
+
 export default router;
