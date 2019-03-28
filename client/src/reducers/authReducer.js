@@ -1,9 +1,11 @@
 import { SET_CURRENT_USER } from '../actions/types';
 import { LOGOUT_CURRENT_USER } from '../actions/types';
+import { SET_SYSTEM_MESSAGE } from '../actions/types';
 
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  user: {},
+  systemMessage: ''
 };
 
 export default function(state = initialState, action) {
@@ -18,6 +20,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         ...initialState
+      };
+    case SET_SYSTEM_MESSAGE:
+      return {
+        ...state,
+        systemMessage: action.payload
       };
     default:
       return state;

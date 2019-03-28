@@ -5,6 +5,9 @@ import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import { errorCodes } from '../../constants/constants';
 import keys from '../../config/keys';
+import crypto from 'crypto';
+import nodemailer from 'nodemailer';
+require('dotenv').config();
 
 const router = express.Router();
 
@@ -114,6 +117,44 @@ router.post('/forgotpassword', (req, res) => {
   User.findOne({ email }).then(user => {
     if (!user) {
       res.status(401).json({ error: errorCodes.emailNotExists });
+    } else {
+      const token = crypto.randomBytes(20).toString('hex');
+      console.log(token);
+      User.update({
+        resetPasswordToken: token,
+        resetPasswordExpires: Date.now() + 360000
+      });
+      const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL,
+          password: process.env.PASSWORD
+        }
+      });
+      const mailOptions = {
+        from: 'help.socio@gmail.com',
+        to: user.email,
+        subject: 'Link to reset password',
+        text:
+          'You are receiving this because you have requested the reset of password for your account \n \n' +
+          'Please click on the following link or paste this link in the browser to complete the process within one hour of receiving it \n \n' +
+          `http://localhost:3000/reset/${token} \n \n` +
+          'If you did not request this please ignore this password and your password will remain unchanged'
+      };
+
+      console.log('sending mail');
+      transporter.sendMail(mailOptions, (err, response) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res
+            .status(200)
+            .json(
+              'Recovery mail sent. Please check your email associated with account'
+            );
+        }
+      });
     }
   });
 });

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { GET_ERRORS } from './types';
+import { SET_SYSTEM_MESSAGE } from './types';
 import { SET_CURRENT_USER } from './types';
 import { LOGOUT_CURRENT_USER } from './types';
 import setAuthToken from '../utils/setAuthToken';
@@ -65,7 +66,12 @@ export const logoutUser = () => {
 export const forgotPassword = userData => dispatch => {
   axios
     .post('http://localhost:8000/api/users/forgotpassword', userData)
-    .then()
+    .then(res => {
+      dispatch({
+        type: SET_SYSTEM_MESSAGE,
+        payload: res.response.data
+      });
+    })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,

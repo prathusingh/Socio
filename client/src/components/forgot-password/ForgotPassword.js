@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types';
 
 import { forgotPassword } from '../../actions/authActions';
 
-const ForgotPassword = ({ errors, touched, serverErrors }) => {
+const ForgotPassword = ({ errors, touched, serverErrors, auth }) => {
   return (
     <Form className="Forgot-password">
       {serverErrors.error && <p>{serverErrors.error}</p>}
@@ -15,6 +15,7 @@ const ForgotPassword = ({ errors, touched, serverErrors }) => {
       <button type="submit" name="reset">
         Reset it
       </button>
+      {auth.systemMessage && <p>{auth.systemMessage}</p>}
     </Form>
   );
 };
@@ -37,12 +38,14 @@ const formikEnhancer = withFormik({
 
 const mapStateToProps = state => {
   return {
-    serverErrors: state.errors
+    serverErrors: state.errors,
+    auth: state.auth
   };
 };
 
 ForgotPassword.propTypes = {
-  serverErrors: PropTypes.object.isRequired
+  serverErrors: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 export const ForgotPasswordForm = connect(mapStateToProps)(formikEnhancer);
