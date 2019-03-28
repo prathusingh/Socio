@@ -129,13 +129,13 @@ router.post('/forgotpassword', (req, res) => {
         service: 'gmail',
         auth: {
           user: process.env.EMAIL,
-          password: process.env.PASSWORD
+          pass: process.env.PASSWORD
         }
       });
       const mailOptions = {
         from: 'help.socio@gmail.com',
         to: user.email,
-        subject: 'Link to reset password',
+        subject: `Hey ${user.name}. Please reset using this link`,
         text:
           'You are receiving this because you have requested the reset of password for your account \n \n' +
           'Please click on the following link or paste this link in the browser to complete the process within one hour of receiving it \n \n' +
@@ -148,11 +148,10 @@ router.post('/forgotpassword', (req, res) => {
         if (err) {
           console.log(err);
         } else {
-          res
-            .status(200)
-            .json(
+          res.status(200).json({
+            message:
               'Recovery mail sent. Please check your email associated with account'
-            );
+          });
         }
       });
     }

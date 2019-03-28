@@ -69,7 +69,7 @@ export const forgotPassword = userData => dispatch => {
     .then(res => {
       dispatch({
         type: SET_SYSTEM_MESSAGE,
-        payload: res.response.data
+        payload: res.data.message
       });
     })
     .catch(err => {
