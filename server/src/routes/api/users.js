@@ -143,7 +143,6 @@ router.post('/forgotpassword', (req, res) => {
           'If you did not request this please ignore this password and your password will remain unchanged'
       };
 
-      console.log('sending mail');
       transporter.sendMail(mailOptions, (err, response) => {
         if (err) {
           console.log(err);
@@ -156,6 +155,15 @@ router.post('/forgotpassword', (req, res) => {
       });
     }
   });
+});
+
+/**
+ * @route GET api/users/resetPassword
+ * @desc verify token
+ * @access public
+ */
+router.get('/resetpassword', (req, res) => {
+  console.log(req.params);
 });
 
 export default router;
