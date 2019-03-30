@@ -1,2 +1,2 @@
 # Socio
-Be Pro-active in society.
+Making Apartments a more livable place.
