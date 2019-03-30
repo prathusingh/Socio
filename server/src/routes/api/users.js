@@ -139,7 +139,7 @@ router.post('/forgotpassword', (req, res) => {
         text:
           'You are receiving this because you have requested the reset of password for your account \n \n' +
           'Please click on the following link or paste this link in the browser to complete the process within one hour of receiving it \n \n' +
-          `http://localhost:3000/reset/${token} \n \n` +
+          `http://localhost:3000/resetpassword/${token} \n \n` +
           'If you did not request this please ignore this password and your password will remain unchanged'
       };
 

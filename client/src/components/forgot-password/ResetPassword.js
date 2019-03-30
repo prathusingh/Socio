@@ -4,13 +4,9 @@ import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
-import { validateResetPasswordToken } from '../../actions/authActions';
+//import { validateResetPasswordToken } from '../../actions/authActions';
 
 const ResetPassword = ({ errors, touched, serverErrors }) => {
-  
-  componentDidMount() {
-      console.log('Component is mounted');
-   }  
   return (
     <Form className="Reset-password">
       {serverErrors.error && <p>{serverErrors.error}</p>}
@@ -40,7 +36,8 @@ const formikEnhancer = withFormik({
   }),
   handleSubmit(values, { props }) {
     const password = values.password;
-    props.dispatch(resetPassword(password));
+    console.log(password);
+    //props.dispatch(resetPassword(password));
   }
 })(ResetPassword);
 
