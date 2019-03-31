@@ -8,16 +8,12 @@ import { validateResetPasswordToken } from '../../actions/authActions';
 import { updatePassword } from '../../actions/authActions';
 
 class ResetPassword extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      token: ''
-    };
-  }
+  token = '';
 
   componentDidMount() {
-    this.setState({ token: this.props.match.params.token });
-    this.props.dispatch(validateResetPasswordToken());
+    this.props.dispatch(
+      validateResetPasswordToken(this.props.match.params.token)
+    );
   }
 
   render() {
@@ -60,10 +56,12 @@ const formikEnhancer = withFormik({
     repassword: Yup.string()
   }),
   handleSubmit(values, { props }) {
-    alert(this.state.token);
     props.dispatch(
       updatePassword(
-        { password: values.password, resetPasswordToken: this.state.token },
+        {
+          password: values.password,
+          resetPasswordToken: props.match.params.token
+        },
         props.history
       )
     );

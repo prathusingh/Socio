@@ -100,7 +100,7 @@ export const updatePassword = (userData, history) => dispatch => {
   axios
     .post('http://localhost:8000/api/users/updatePassword', userData)
     .then(res => {
-      history.push('./login');
+      history.push('/login');
     })
     .catch(err => {
       dispatch({
