@@ -83,13 +83,29 @@ export const forgotPassword = userData => dispatch => {
 export const validateResetPasswordToken = userData => dispatch => {
   axios
     .get('http://localhost:8000/api/users/resetpassword', {
-      params: userData
+      params: {
+        resetPasswordToken: userData
+      }
     })
-    .then()
+    .then(() => console.log('verified'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
     );
+};
+
+export const updatePassword = (userData, history) => dispatch => {
+  axios
+    .post('http://localhost:8000/api/users/updatePassword', userData)
+    .then(res => {
+      history.push('./login');
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
 };

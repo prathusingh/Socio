@@ -22,7 +22,11 @@ ReactDOM.render(
         <Route exact path="/signup" component={SignupForm} />
         <Route exact path="/feed" component={Feed} />
         <Route exact path="/forgotpassword" component={ForgotPasswordForm} />
-        <Route path="/resetpassword" component={ResetPasswordForm} />
+        <Route
+          exact
+          path="/resetpassword/:token"
+          component={ResetPasswordForm}
+        />
       </div>
     </Router>
   </Provider>,

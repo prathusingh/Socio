@@ -112,18 +112,17 @@ router.get(
  */
 router.post('/forgotpassword', (req, res) => {
   const { email } = req.body;
-
+  const token = crypto.randomBytes(20).toString('hex');
   // Check for user
-  User.findOne({ email }).then(user => {
-    if (!user) {
-      res.status(401).json({ error: errorCodes.emailNotExists });
-    } else {
-      const token = crypto.randomBytes(20).toString('hex');
-      console.log(token);
-      User.update({
-        resetPasswordToken: token,
-        resetPasswordExpires: Date.now() + 360000
-      });
+  User.findOneAndUpdate(
+    { email },
+    {
+      resetPasswordToken: token,
+      resetPasswordExpires: Date.now() + 360000
+    },
+    { new: true }
+  )
+    .then(user => {
       const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         service: 'gmail',
@@ -142,7 +141,6 @@ router.post('/forgotpassword', (req, res) => {
           `http://localhost:3000/resetpassword/${token} \n \n` +
           'If you did not request this please ignore this password and your password will remain unchanged'
       };
-
       transporter.sendMail(mailOptions, (err, response) => {
         if (err) {
           console.log(err);
@@ -153,8 +151,10 @@ router.post('/forgotpassword', (req, res) => {
           });
         }
       });
-    }
-  });
+    })
+    .catch(err => {
+      res.status(401).json({ error: errorCodes.emailNotExists });
+    });
 });
 
 /**
@@ -163,7 +163,44 @@ router.post('/forgotpassword', (req, res) => {
  * @access public
  */
 router.get('/resetpassword', (req, res) => {
-  console.log(req.params);
+  User.findOne({
+    resetPasswordToken: req.query.resetPasswordToken.trim(),
+    resetPasswordExpires: {
+      $gt: Date.now()
+    }
+  }).then(user => {
+    if (!user) {
+      res.status(401).json({ error: errorCodes.tokenExpired });
+    } else {
+      res.status(200).json('looks good');
+    }
+  });
+});
+
+/**
+ * @route POST api/users/updatePassword
+ * @desc update password
+ * @access public
+ */
+router.post('/updatePassword', (req, res) => {
+  const { password, resetPasswordToken } = req.body;
+  User.findOneAndUpdate(
+    {
+      resetPasswordToken
+    },
+    {
+      password
+    },
+    {
+      new: true
+    }
+  )
+    .then(user => {
+      res.status(200).json('successfully updated');
+    })
+    .catch(err => {
+      res.status(401).json({ error: errorCodes.passwordNotUpdated });
+    });
 });
 
 export default router;
