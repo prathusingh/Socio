@@ -10,11 +10,17 @@ import cors from 'cors';
 const app = express();
 
 // Body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // use cors
-app.use(cors());
+const corsOption = {
+  origin: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  exposedHeaders: ['x-auth-token']
+};
+app.use(cors(corsOption));
 
 // Connect to db
 mongoose
