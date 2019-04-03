@@ -4,7 +4,7 @@ import { GET_ERRORS } from './types';
 import { SET_SYSTEM_MESSAGE } from './types';
 import { SET_CURRENT_USER } from './types';
 import { LOGOUT_CURRENT_USER } from './types';
-import setAuthToken from '../utils/setAuthToken';
+import tokenUtil from '../utils/tokenUtil';
 
 // register user
 export const registerUser = (userData, history) => dispatch => {
@@ -29,7 +29,7 @@ export const loginUser = (userData, history) => dispatch => {
       localStorage.setItem('jwtToken', token);
 
       // set token to auth header
-      setAuthToken(token);
+      tokenUtil.setAuthToken(token);
 
       // decode token
       const decoded = jwt_decode(token);

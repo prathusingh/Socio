@@ -203,4 +203,35 @@ router.post('/updatePassword', (req, res) => {
     });
 });
 
+/**
+ * @route POST api/users/auth/google/token
+ * @desc authentication with google
+ * @access private
+ */
+router.post(
+  '/auth/google/token',
+  passport.authenticate('google-token', { session: false }),
+  (req, res) => {
+    if (!req.user) {
+      res.status(401).json({ error: errorCodes.incorrectCredentials });
+    } else {
+      /*  // Define payload for the token
+       const payload = { id: user.id, name: user.name };
+       // Sign token
+       jwt.sign(
+         payload,
+         keys.secretKey,
+         { expiresIn: 3600 },
+         (err, token) => {
+           res.json({
+             success: true,
+             token: 'Bearer ' + token
+           });
+         }
+       ); */
+      res.json(req.user);
+    }
+  }
+);
+
 export default router;

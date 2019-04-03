@@ -6,10 +6,15 @@ import User from '../models/User';
 
 const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;
-const GoogleTokenStrategy = googleToken.Strategy;
+const GoogleStrategy = googleToken.Strategy;
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: keys.secretKey
+};
+
+const googleOpts = {
+  clientID: keys.googleClientId,
+  clientSecret: keys.googleClientSecret
 };
 
 export default passport => {
@@ -25,20 +30,33 @@ export default passport => {
   );
 
   passport.use(
-    new GoogleTokenStrategy(
-      {
-        clientID: keys.googleClientId,
-        clientSecret: keys.googleClientSecret
-      },
+    new GoogleStrategy(
+      googleOpts,
       (accessToken, refreshToken, profile, done) => {
-        User.upsertGoogleUser(
-          accessToken,
-          refreshToken,
-          profile,
-          (err, user) => {
-            return done(err, user);
+        User.findOne({ 'googleProvider.id': profile.id }).then(user => {
+          if (user) {
+            return done(null, user);
+          } else {
+            const newUser = new User({
+              name: profile.displayName,
+              email: profile.emails[0].value,
+              googleProvider: {
+                id: profile.id,
+                token: accessToken
+              }
+            });
+
+            // save new user
+            newUser
+              .save()
+              .then(user => {
+                return done(null, user);
+              })
+              .catch(err => {
+                return done(null, false);
+              });
           }
-        );
+        });
       }
     )
   );
