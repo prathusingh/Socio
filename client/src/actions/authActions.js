@@ -5,6 +5,7 @@ import { SET_SYSTEM_MESSAGE } from './types';
 import { SET_CURRENT_USER } from './types';
 import { LOGOUT_CURRENT_USER } from './types';
 import tokenUtil from '../utils/tokenUtil';
+import { RSA_NO_PADDING } from 'constants';
 
 // register user
 export const registerUser = (userData, history) => dispatch => {
@@ -19,7 +20,7 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
-// login user
+// login user with email and password
 export const loginUser = (userData, history) => dispatch => {
   axios
     .post('http://localhost:8000/api/users/login', userData)
@@ -46,6 +47,36 @@ export const loginUser = (userData, history) => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// login user with google auth
+export const loginGoogleAuthUser = (userData, history) => dispatch => {
+  fetch('http://localhost:8000/api/users/auth/google/token', userData)
+    .then(res => res.json())
+    .then(res => {
+      // save to local storage
+      console.log(res);
+      const { token } = res;
+      localStorage.setItem('jwtToken', token);
+
+      // set token to auth header
+      tokenUtil.setAuthToken(token);
+
+      // decode token
+      const decoded = jwt_decode(token);
+
+      // set current user
+      dispatch(setCurrentUser(decoded));
+
+      // redirect to current user home page
+      history.push('./feed');
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
 };
 
 // set logged in user
