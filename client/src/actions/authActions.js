@@ -5,7 +5,6 @@ import { SET_SYSTEM_MESSAGE } from './types';
 import { SET_CURRENT_USER } from './types';
 import { LOGOUT_CURRENT_USER } from './types';
 import tokenUtil from '../utils/tokenUtil';
-import { RSA_NO_PADDING } from 'constants';
 
 // register user
 export const registerUser = (userData, history) => dispatch => {

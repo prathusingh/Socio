@@ -44,6 +44,8 @@ const formikEnhancer = withFormik({
       .min(8, 'Please enter password greater than 8 characters')
       .required('Did you forget to enter password'),
     repassword: Yup.string()
+      .oneOf([Yup.ref('password')], 'Password does not match')
+      .required('Please reenter password')
   }),
   handleSubmit: (values, { props }) => {
     const signingUser = {
