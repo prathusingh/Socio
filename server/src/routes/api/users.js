@@ -21,6 +21,7 @@ router.post('/register', (req, res) => {
 
   // Check whether user exists
   User.findOne({ email }).then(user => {
+    console.log(user);
     if (user) {
       res.status(401).json({ error: errorCodes.emailExists });
     } else {
@@ -37,6 +38,7 @@ router.post('/register', (req, res) => {
             res.status(500).json({ error: errorCodes.internalError });
           }
           newUser.password = hash;
+          console.log(user);
 
           // save new user
           newUser
@@ -215,21 +217,16 @@ router.post(
     if (!req.user) {
       res.status(401).json({ error: errorCodes.incorrectCredentials });
     } else {
-      /*  // Define payload for the token
-       const payload = { id: user.id, name: user.name };
-       // Sign token
-       jwt.sign(
-         payload,
-         keys.secretKey,
-         { expiresIn: 3600 },
-         (err, token) => {
-           res.json({
-             success: true,
-             token: 'Bearer ' + token
-           });
-         }
-       ); */
-      res.json(req.user);
+      // Define payload for the token
+      const payload = { id: req.user.id, name: req.user.name };
+
+      // Sign token
+      jwt.sign(payload, keys.secretKey, { expiresIn: 3600 }, (err, token) => {
+        res.json({
+          success: true,
+          token: 'Bearer ' + token
+        });
+      });
     }
   }
 );
