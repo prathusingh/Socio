@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import passport from 'passport';
-import db from './config/keys.js';
+import db from './config/keys';
 import users from './routes/api/users';
 import tokenAuthentication from './config/passport';
 import cors from 'cors';
