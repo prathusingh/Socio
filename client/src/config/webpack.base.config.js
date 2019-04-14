@@ -39,7 +39,7 @@ module.exports = env => {
           'process.env.VERSION': JSON.stringify(env.VERSION),
           'process.env.PLATFORM': JSON.stringify(env.PLATFORM)
         }),
-        new CopyWebpackPlugin([{ from: 'src/assets/images' }])
+        new CopyWebpackPlugin([{ from: './src/assets/images' }])
       ]
     }
   ]);
