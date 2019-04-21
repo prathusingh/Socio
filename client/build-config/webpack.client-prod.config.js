@@ -1,10 +1,11 @@
+const path = require('path');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 
-const baseConfig = require('./webpack.base.config');
+const baseConfig = require('./webpack.client.config');
 
 const prodConfiguration = env => {
   return merge([
@@ -14,8 +15,10 @@ const prodConfiguration = env => {
       },
       plugins: [
         new MiniCssExtractPlugin(),
-        new OptimizeCssAssetsPlugin(),
-        new Visualizer({ filename: './statistics.html' })
+        new OptimizeCssAssetsPlugin()
+        /* new Visualizer({
+          filename: path.resolve(__dirname, '../../dist') + '/statistics.html'
+        }) */
       ]
     }
   ]);

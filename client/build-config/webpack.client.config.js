@@ -39,14 +39,18 @@ module.exports = env => {
       },
       plugins: [
         new HtmlWebpackPlugin({
-          template: './src/index.html',
-          filename: './index.html'
+          template: path.join(__dirname, '../src/index.html'),
+          filename: path.join(__dirname, '../dist/index.html')
         }),
         new webpack.DefinePlugin({
           'process.env.VERSION': JSON.stringify(env.VERSION),
           'process.env.PLATFORM': JSON.stringify(env.PLATFORM)
         }),
-        new CopyWebpackPlugin([{ from: './src/assets/images' }])
+        new CopyWebpackPlugin([
+          {
+            from: path.join(__dirname, '../src/assets/images')
+          }
+        ])
       ]
     }
   ]);

@@ -19,8 +19,8 @@
     "yup": "^0.26.10"
   },
   "scripts": {
-    "client": "webpack-dev-server --mode development --config ./build-config/webpack.base.config.js --open --hot --history-api-fallback --env.PLATFORM=local --env.VERSION=stag",
-    "build-client": "webpack --mode production --config ./build-config/webpack.prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress"
+    "client": "webpack-dev-server --mode development --config ./build-config/webpack.client.config.js --open --hot --history-api-fallback --env.PLATFORM=local --env.VERSION=stag",
+    "build-client": "webpack --mode production --config ./build-config/webpack.client-prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress"
   },
   "eslintConfig": {
     "extends": "react-app"
