@@ -7,6 +7,7 @@
     "fetch": "^1.1.0",
     "formik": "^1.5.1",
     "jwt-decode": "^2.2.0",
+    "path": "^0.12.7",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-google-login": "^5.0.3",
@@ -19,8 +20,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --config ./src/config/webpack.base.config.js --open --hot --history-api-fallback --env.PLATFORM=local --env.VERSION=stag",
-    "prebuild": "webpack --mode production --config ./src/config/webpack.prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress",
-    "build": "node server"
+    "prebuild": "webpack --mode production --config ./src/config/webpack.prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress"
   },
   "eslintConfig": {
     "extends": "react-app"
