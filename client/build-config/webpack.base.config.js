@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const APP_DIR = path.resolve(__dirname, '../../src');
+const APP_DIR = path.resolve(__dirname, '../src');
 
 module.exports = env => {
   const { PLATFORM, VERSION } = env;
@@ -13,7 +13,7 @@ module.exports = env => {
     {
       entry: ['@babel/polyfill', APP_DIR],
       output: {
-        path: path.resolve(__dirname, '../../dist'),
+        path: path.resolve(__dirname, '../dist'),
         filename: 'client-bundle.js'
       },
       module: {
