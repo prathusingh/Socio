@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 import { LandingLoginForm } from './landing-login/LandingLogin';
-import keys from '../../../config/keys';
 import { loginGoogleAuthUser } from '../../../actions/authActions';
 import './Auth.scss';
 
@@ -17,7 +16,6 @@ class Auth extends Component {
     const options = {
       method: 'POST',
       body: tokenBlob,
-      mode: 'cors',
       cache: 'default'
     };
 
@@ -44,7 +42,7 @@ class Auth extends Component {
           </Link>
         </div>
         <GoogleLogin
-          clientId={keys.GOOGLE_CLIENT_ID}
+          clientId={process.env.GOOGLE_CLIENT_ID}
           buttonText="Login"
           onSuccess={this.googleResponse}
           onFailure={this.onFailure}

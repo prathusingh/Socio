@@ -23,8 +23,9 @@ const corsOption = {
 app.use(cors(corsOption));
 
 // Connect to db
+const dbUrI = process.env.NODE_ENV === 'dev' ? db.mongoURI : db.mongoURIProd;
 mongoose
-  .connect(db.mongoURI, { useNewUrlParser: true, useCreateIndex: true })
+  .connect(dbUrI, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => {
     console.log('DB connected');
   })

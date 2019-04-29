@@ -13,13 +13,7 @@ const prodConfiguration = env => {
       optimization: {
         minimizer: [new UglifyJsPlugin()]
       },
-      plugins: [
-        new MiniCssExtractPlugin(),
-        new OptimizeCssAssetsPlugin()
-        /* new Visualizer({
-          filename: path.resolve(__dirname, '../../dist') + '/statistics.html'
-        }) */
-      ]
+      plugins: [new MiniCssExtractPlugin(), new OptimizeCssAssetsPlugin()]
     }
   ]);
 };
