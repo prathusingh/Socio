@@ -27,7 +27,11 @@
     "passport": "^0.4.0",
     "passport-google-token": "^0.1.2",
     "passport-jwt": "^4.0.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
