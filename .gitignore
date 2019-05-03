@@ -3,3 +3,5 @@
 **/.DS_Store
 **/.vscode
 **/.env
+**/.idea
+**/__pycache__
