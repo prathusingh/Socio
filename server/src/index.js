@@ -39,7 +39,6 @@ app.use(passport.initialize());
 // Passport Config
 tokenAuthentication(passport);
 
-// Use routes
 app.use('/api/users', users);
 
 const port = process.env.PORT || 8000;
