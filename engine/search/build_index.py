@@ -1,4 +1,5 @@
 import re
+import data_cleaner
 from nltk.corpus import stopwords
 
 
@@ -7,18 +8,12 @@ class BuildIndex:
     def __init__(self, files):
         self.filenames = files
         self.file_to_tokens = self.process_files()
-        self.build_inverted_index(self.file_to_tokens)
 
     def process_files(self):
         file_to_tokens = {}
         for file in self.filenames:
-            pattern = re.compile('[\W_]+')
             file_to_tokens[file] = open('./sample-corpus/'+file, "r").read().lower()
-            file_to_tokens[file] = pattern.sub(' ', file_to_tokens[file])
-            re.sub(r'[\W_]+', '', file_to_tokens[file])
-            file_to_tokens[file] = file_to_tokens[file].split()
-            file_to_tokens[file] = [word for word in file_to_tokens[file] if word not in stopwords.words('english')]
-
+            file_to_tokens[file] = data_cleaner.clean_data(file_to_tokens[file])
         return file_to_tokens
 
     # input = [word1, word2 .....]
@@ -59,5 +54,5 @@ class BuildIndex:
         return inverted_index
 
     def build_inverted_index(self, file_tokens):
-        self.build_index(self.make_indices(file_tokens))
+        return self.build_index(self.make_indices(file_tokens))
 
