@@ -4,8 +4,6 @@ var _express = _interopRequireDefault(require("express"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
-var _mongoose = _interopRequireDefault(require("mongoose"));
-
 var _passport = _interopRequireDefault(require("passport"));
 
 var _keys = _interopRequireDefault(require("./config/keys"));
@@ -17,6 +15,8 @@ var _passport2 = _interopRequireDefault(require("./config/passport"));
 var _cors = _interopRequireDefault(require("cors"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var MongoClient = require('mongodb').MongoClient;
 
 var app = (0, _express["default"])(); // Body parser middleware
 
@@ -34,16 +34,14 @@ var corsOption = {
 app.use((0, _cors["default"])(corsOption)); // Connect to db
 
 var dbUrI = process.env.NODE_ENV === 'dev' ? _keys["default"].mongoURI : _keys["default"].mongoURIProd;
-
-_mongoose["default"].connect(dbUrI, {
-  useNewUrlParser: true,
-  useCreateIndex: true
-}).then(function () {
+var client = new MongoClient(dbUrI, {
+  useNewUrlParser: true
+});
+client.connect(function () {
   console.log('DB connected');
-})["catch"](function (err) {
+}, function (err) {
   console.log(err);
 }); // Passport middleware
-
 
 app.use(_passport["default"].initialize()); // Passport Config
 

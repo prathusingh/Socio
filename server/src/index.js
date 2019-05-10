@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
+const MongoClient = require('mongodb').MongoClient;
 import passport from 'passport';
 import db from './config/keys';
 import users from './routes/api/users';
@@ -24,14 +24,17 @@ app.use(cors(corsOption));
 
 // Connect to db
 const dbUrI = process.env.NODE_ENV === 'dev' ? db.mongoURI : db.mongoURIProd;
-mongoose
-  .connect(dbUrI, { useNewUrlParser: true, useCreateIndex: true })
-  .then(() => {
+const client = new MongoClient(dbUrI, {
+  useNewUrlParser: true
+});
+client.connect(
+  () => {
     console.log('DB connected');
-  })
-  .catch(err => {
+  },
+  err => {
     console.log(err);
-  });
+  }
+);
 
 // Passport middleware
 app.use(passport.initialize());
