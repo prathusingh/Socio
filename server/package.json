@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "heroku-prebuild": "rimraf dist/ && babel ./src/ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./package-lock.json,./.env --copy-files ./.babelrc",
-    "start": "node ./src/index.js",
+    "start": "node ./dist/src/index.js",
     "start-dev": "NODE_ENV=dev nodemon --exec babel-node ./src/index.js"
   },
   "author": "Prathu Singh",
