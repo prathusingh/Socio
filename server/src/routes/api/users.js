@@ -231,4 +231,13 @@ router.post(
   }
 );
 
+/**
+ * @route GET /
+ * @desc test route
+ * @access public
+ */
+router.get('/', (req, res) => {
+  res.status(200).json({ msg: 'listening' });
+});
+
 export default router;
