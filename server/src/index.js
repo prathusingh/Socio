@@ -46,5 +46,7 @@ app.use('/api/users', users);
 
 const port = process.env.PORT || 8000;
 
-const server = app.listen(port, () => console.log(`Server running on ${port}`));
+const server = app.listen(port, () =>
+  console.log(`Servers running on ${port}`)
+);
 console.log(server.address().address);
