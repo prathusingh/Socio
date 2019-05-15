@@ -56,7 +56,14 @@ module.exports = env => {
         }),
         new CopyWebpackPlugin([
           {
-            from: path.join(__dirname, '../src/assets/images')
+            from: path.join(__dirname, '../src/assets/images'),
+            to: 'public',
+            toType: 'dir'
+          },
+          {
+            from: path.join(__dirname, '../public'),
+            to: 'public',
+            toType: 'dir'
           }
         ]),
         new Dotenv()
