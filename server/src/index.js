@@ -24,6 +24,7 @@ app.use(cors(corsOption));
 
 // Connect to db
 const dbUrI = process.env.NODE_ENV === 'dev' ? db.mongoURI : db.mongoURIProd;
+console.log(dbUrI);
 const client = new MongoClient(dbUrI, {
   useNewUrlParser: true
 });
