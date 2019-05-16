@@ -237,7 +237,7 @@ router.post(
  * @access public
  */
 router.get('', (req, res) => {
-  res.status(200).json({ msg: 'listening' });
+  res.status(200).json('listening');
 });
 
 export default router;
