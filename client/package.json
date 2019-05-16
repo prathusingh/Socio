@@ -20,7 +20,7 @@
     "yup": "^0.26.10"
   },
   "scripts": {
-    "start-client": "webpack-dev-server --mode development --config ./build-config/webpack.client.config.js --hot --history-api-fallback --env.PLATFORM=dev --env.VERSION=stag",
+    "start-client": "webpack-dev-server --mode development --config ./build-config/webpack.client.config.js --hot --env.PLATFORM=dev --env.VERSION=stag",
     "build-client": "webpack --mode production --config ./build-config/webpack.client-prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress"
   },
   "eslintConfig": {

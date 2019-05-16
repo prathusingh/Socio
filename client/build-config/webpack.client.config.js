@@ -47,7 +47,7 @@ module.exports = env => {
       },
       plugins: [
         new HtmlWebpackPlugin({
-          template: path.join(__dirname, '../src/index.html'),
+          template: path.join(__dirname, '../public/index.html'),
           filename: path.join(__dirname, '../dist/index.html')
         }),
         new webpack.DefinePlugin({
