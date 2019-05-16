@@ -236,7 +236,7 @@ router.post(
  * @desc test route
  * @access public
  */
-router.get('', (req, res) => {
+router.get('/trick', (req, res) => {
   res.status(200).json('listening');
 });
 
