@@ -1,4 +1,4 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
 
 export default {
   getAPIURLPrefix: () => {
