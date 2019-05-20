@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start-client": "webpack-dev-server --mode development --config ./build-config/webpack.client.config.js --hot --env.PLATFORM=dev --env.VERSION=stag",
-    "build-client": "webpack --mode production --config ./build-config/webpack.client-prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress"
+    "build-client": "npm install && webpack --mode production --config ./build-config/webpack.client-prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress"
   },
   "eslintConfig": {
     "extends": "react-app"
