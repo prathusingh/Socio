@@ -5,11 +5,12 @@ import { SET_SYSTEM_MESSAGE } from './types';
 import { SET_CURRENT_USER } from './types';
 import { LOGOUT_CURRENT_USER } from './types';
 import tokenUtil from '../utils/tokenUtil';
+import apiURLPrefix from '../utils/apiURLPrefix';
 
 // register user
 export const registerUser = (userData, history) => dispatch => {
   axios
-    .post('http://localhost:8000/api/users/register', userData)
+    .post(`${apiURLPrefix.getAPIURLPrefix()}/register`, userData)
     .then(res => history.push('./login'))
     .catch(err =>
       dispatch({
@@ -22,7 +23,7 @@ export const registerUser = (userData, history) => dispatch => {
 // login user with email and password
 export const loginUser = (userData, history) => dispatch => {
   axios
-    .post('http://localhost:8000/api/users/login', userData)
+    .post(`${apiURLPrefix.getAPIURLPrefix()}/login`, userData)
     .then(res => {
       // save to local storage
       const { token } = res.data;
@@ -50,7 +51,7 @@ export const loginUser = (userData, history) => dispatch => {
 
 // login user with google auth
 export const loginGoogleAuthUser = (userData, history) => dispatch => {
-  fetch('http://localhost:8000/api/users/auth/google/token', userData)
+  fetch(`${apiURLPrefix.getAPIURLPrefix()}/auth/google/token`, userData)
     .then(res => res.json())
     .then(res => {
       // save to local storage
@@ -95,7 +96,7 @@ export const logoutUser = () => {
 
 export const forgotPassword = userData => dispatch => {
   axios
-    .post('http://localhost:8000/api/users/forgotpassword', userData)
+    .post(`${apiURLPrefix.getAPIURLPrefix()}/forgotpassword`, userData)
     .then(res => {
       dispatch({
         type: SET_SYSTEM_MESSAGE,
@@ -112,7 +113,7 @@ export const forgotPassword = userData => dispatch => {
 
 export const validateResetPasswordToken = userData => dispatch => {
   axios
-    .get('http://localhost:8000/api/users/resetpassword', {
+    .get(`${apiURLPrefix.getAPIURLPrefix()}/resetpassword`, {
       params: {
         resetPasswordToken: userData
       }
@@ -128,7 +129,7 @@ export const validateResetPasswordToken = userData => dispatch => {
 
 export const updatePassword = (userData, history) => dispatch => {
   axios
-    .post('http://localhost:8000/api/users/updatePassword', userData)
+    .post(`${apiURLPrefix.getAPIURLPrefix()}/updatePassword`, userData)
     .then(res => {
       history.push('/login');
     })
