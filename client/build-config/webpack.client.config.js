@@ -52,7 +52,11 @@ module.exports = env => {
         }),
         new webpack.DefinePlugin({
           'process.env.VERSION': JSON.stringify(env.VERSION),
-          'process.env.PLATFORM': JSON.stringify(env.PLATFORM)
+          'process.env.PLATFORM': JSON.stringify(env.PLATFORM),
+          'process.env.API_PREFIX':
+            PLATFORM === 'production'
+              ? 'https://besocio-api.herokuapp.com/api/users'
+              : 'http://localhost:8000/api/users'
         }),
         new CopyWebpackPlugin([
           {
