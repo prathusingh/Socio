@@ -25,5 +25,23 @@ class Query:
             documents_list += Query.query_one_word(query_word, self.inverted_index)
         return list(set(documents_list))
 
+    def phrase_query(string, invertedIndex):
+        pattern = re.compile('[\W_]+')
+        string = pattern.sub(' ', string)
+        listOfLists, result = [], []
+        for word in string.split():
+            listOfLists.append(one_word_query(word))
+        setted = set(listOfLists[0]).intersection(*listOfLists)
+        for filename in setted:
+            temp = []
+            for word in string.split():
+                temp.append(invertedIndex[word][filename][:])
+            for i in range(len(temp)):
+                for ind in range(len(temp[i])):
+                    temp[i][ind] -= i
+            if set(temp[0]).intersection(*temp):
+                result.append(filename)
+        return rankResults(result, string)
+
 
 query = Query(['pg11.txt', 'pg74.txt'])
