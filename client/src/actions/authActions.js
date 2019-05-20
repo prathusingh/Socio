@@ -9,6 +9,7 @@ import apiURLPrefix from '../utils/apiURLPrefix';
 
 // register user
 export const registerUser = (userData, history) => dispatch => {
+  console.log(process.env.API_PROD_PREFIX);
   axios
     .post(`${apiURLPrefix.getAPIURLPrefix()}/register`, userData)
     .then(res => history.push('./login'))
