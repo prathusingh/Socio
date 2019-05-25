@@ -6,7 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const APP_DIR = path.resolve(__dirname, '../src');
-const dotenv = require('dotenv').config({ path: __dirname + '../.env' });
+const env_path = path.resolve(__dirname, '../.env');
+const dotenv = require('dotenv').config({ path: env_path });
 
 module.exports = env => {
   const { PLATFORM, VERSION } = env;
@@ -55,10 +56,12 @@ module.exports = env => {
           'process.env.PLATFORM': JSON.stringify(env.PLATFORM),
           'process.env.API_PREFIX': JSON.stringify(
             PLATFORM === 'production'
-              ? 'https://besocio-api.herokuapp.com/api/users'
-              : 'http://localhost:8000/api/users'
+              ? dotenv.parsed.API_PREFIX_PROD
+              : dotenv.parsed.API_PREFIX_DEV
           ),
-          'process.env': dotenv.parsed
+          'process.env.GOOGLE_CLIENT_ID': JSON.stringify(
+            dotenv.parsed.GOOGLE_CLIENT_ID
+          )
         }),
         new CopyWebpackPlugin([
           {
