@@ -57,6 +57,9 @@ module.exports = env => {
             PLATFORM === 'production'
               ? 'https://besocio-api.herokuapp.com/api/users'
               : 'http://localhost:8000/api/users'
+          ),
+          'process.env.GOOGLE_CLIENT_ID': JSON.stringify(
+            '146348995745-79un33sp9h2s4udt930tofsepj2lpclg.apps.googleusercontent.com'
           )
         }),
         new CopyWebpackPlugin([
