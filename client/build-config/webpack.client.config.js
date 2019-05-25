@@ -4,9 +4,9 @@ const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 const APP_DIR = path.resolve(__dirname, '../src');
+const dotenv = require('dotenv').config({ path: __dirname + '../.env' });
 
 module.exports = env => {
   const { PLATFORM, VERSION } = env;
@@ -58,9 +58,7 @@ module.exports = env => {
               ? 'https://besocio-api.herokuapp.com/api/users'
               : 'http://localhost:8000/api/users'
           ),
-          'process.env.GOOGLE_CLIENT_ID': JSON.stringify(
-            '146348995745-79un33sp9h2s4udt930tofsepj2lpclg.apps.googleusercontent.com'
-          )
+          'process.env': dotenv.parsed
         }),
         new CopyWebpackPlugin([
           {
@@ -73,8 +71,7 @@ module.exports = env => {
             to: 'public',
             toType: 'dir'
           }
-        ]),
-        new Dotenv()
+        ])
       ]
     }
   ]);
