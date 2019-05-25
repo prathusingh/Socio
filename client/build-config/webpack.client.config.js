@@ -56,7 +56,7 @@ module.exports = env => {
           'process.env.PLATFORM': JSON.stringify(env.PLATFORM),
           'process.env.API_PREFIX': JSON.stringify(
             PLATFORM === 'production'
-              ? dotenv.parsed.API_PREFIX_PROD
+              ? process.env.API_PREFIX_PROD
               : dotenv.parsed.API_PREFIX_DEV
           ),
           'process.env.GOOGLE_CLIENT_ID': JSON.stringify(
