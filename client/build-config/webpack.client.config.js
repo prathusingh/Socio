@@ -57,10 +57,10 @@ module.exports = env => {
           'process.env.API_PREFIX': JSON.stringify(
             PLATFORM === 'production'
               ? process.env.API_PREFIX_PROD
-              : dotenv.parsed.API_PREFIX_DEV
+              : process.env.API_PREFIX_DEV
           ),
           'process.env.GOOGLE_CLIENT_ID': JSON.stringify(
-            dotenv.parsed.GOOGLE_CLIENT_ID
+            process.env.GOOGLE_CLIENT_ID
           )
         }),
         new CopyWebpackPlugin([
