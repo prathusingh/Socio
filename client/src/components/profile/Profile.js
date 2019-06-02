@@ -10,6 +10,14 @@ class Profile extends React.Component {
       interests: []
     };
   }
+
+  updateInterests(event) {
+    if (event.key === 'Enter') {
+      const interests = this.state.interests.slice();
+      interests.push(event.target.value);
+      this.setState({ interests: interests });
+    }
+  }
   render() {
     return (
       <div className="profile">
@@ -37,15 +45,18 @@ class Profile extends React.Component {
               <label htmlFor="interests">
                 <span>Interests: </span>
               </label>
-              <input type="text" id="interests" name="interests" />
+              <input
+                type="text"
+                id="interests"
+                name="interests"
+                onKeyDown={this.updateInterests.bind(this)}
+              />
               <span>Press Enter to add</span>
             </p>
             <ul id="interestSelected">
-              {this.state.interests.forEach((interest, index) => {
-                <li key={index}>
-                  <span>{interest}</span>
-                </li>;
-              })}
+              {this.state.interests.map((interest, index) => (
+                <li key={index}>{interest}</li>
+              ))}
             </ul>
             <p>
               <label>Opt in Socio</label>
