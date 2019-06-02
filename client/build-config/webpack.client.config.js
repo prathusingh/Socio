@@ -23,7 +23,11 @@ module.exports = env => {
         fs: 'empty'
       },
       devServer: {
-        port: 8081
+        contentBase: path.join(__dirname, '../dist'),
+        compress: true,
+        port: 8081,
+        historyApiFallback: true,
+        publicPath: '/'
       },
       module: {
         rules: [
