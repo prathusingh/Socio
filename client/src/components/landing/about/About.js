@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faAd, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 import './About.scss';
 
@@ -11,9 +11,16 @@ export class About extends Component {
         <ul>
           <li>
             <FontAwesomeIcon icon={faSearch} />
-            Know what's happening around you
+            <span>Know what's happening around you.</span>
           </li>
-          <li>Sell/Buy something from people around you</li>
+          <li>
+            <FontAwesomeIcon icon={faAd} />
+            <span>Sell/Buy from neighbourhood.</span>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faQuestion} />
+            <span>Let management know your queries.</span>
+          </li>
         </ul>
       </div>
     );
