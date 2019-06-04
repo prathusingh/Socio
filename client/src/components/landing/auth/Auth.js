@@ -28,25 +28,29 @@ class Auth extends Component {
   render() {
     return (
       <div className="auth">
-        <LandingLoginForm />
-        <div className="auth-buttons">
+        <div class="login">
           <Link to="/login">
             <button name="Login" type="button">
               Log in
             </button>
           </Link>
-          <Link to="/signup">
-            <button name="Signup" type="button">
-              Sign up
-            </button>
-          </Link>
+          <GoogleLogin
+            clientId={process.env.GOOGLE_CLIENT_ID}
+            buttonText="Google"
+            onSuccess={this.googleResponse}
+            onFailure={this.onFailure}
+          />
         </div>
-        <GoogleLogin
-          clientId={process.env.GOOGLE_CLIENT_ID}
-          buttonText="Login"
-          onSuccess={this.googleResponse}
-          onFailure={this.onFailure}
-        />
+        <div class="signup">
+          <section>
+            <h3>Join Socio today.</h3>
+            <Link to="/signup">
+              <button name="Signup" type="button">
+                Sign up
+              </button>
+            </Link>
+          </section>
+        </div>
       </div>
     );
   }
