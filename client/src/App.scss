@@ -1,9 +1,11 @@
 .app {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .landing {
+  flex: auto;
   display: flex;
   flex-direction: row;
 }

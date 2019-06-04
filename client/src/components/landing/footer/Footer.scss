@@ -1,4 +1,14 @@
 .footer {
-  background: #e6ecf0;
-  height: 20vh;
+  border-top: solid 0.001em lightgray;
+  background: #ffffff;
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer > * {
+  color: #aab8c2;
+  font: 12px Helvetica Neue;
 }
