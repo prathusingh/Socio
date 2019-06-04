@@ -11,7 +11,7 @@ export class About extends Component {
         <ul>
           <li>
             <FontAwesomeIcon icon={faSearch} />
-            <span>Know what's happening around you.</span>
+            <span>Your neighbour can be your gym partner if you know !</span>
           </li>
           <li>
             <FontAwesomeIcon icon={faAd} />

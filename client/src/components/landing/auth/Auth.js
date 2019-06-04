@@ -34,22 +34,25 @@ class Auth extends Component {
               Log in
             </button>
           </Link>
-          <GoogleLogin
-            clientId={process.env.GOOGLE_CLIENT_ID}
-            buttonText="Google"
-            onSuccess={this.googleResponse}
-            onFailure={this.onFailure}
-          />
         </div>
         <div class="signup">
           <section>
+            <h2>Embrace your daily routine outside work !</h2>
             <h3>Join Socio today.</h3>
             <Link to="/signup">
-              <button name="Signup" type="button" class="wide-btn">
+              <button name="Signup" type="button" className="wide-btn">
                 Sign up
               </button>
             </Link>
           </section>
+        </div>
+        <div className="google-login">
+          <GoogleLogin
+            clientId={process.env.GOOGLE_CLIENT_ID}
+            buttonText="Continue with Google"
+            onSuccess={this.googleResponse}
+            onFailure={this.onFailure}
+          />
         </div>
       </div>
     );
