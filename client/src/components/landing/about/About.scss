@@ -2,8 +2,13 @@
   flex: auto;
   background: #1da1f2;
   ul {
+    display: flex;
+    flex-direction: column;
     list-style-type: none;
-    margin-top: 25%;
+    align-items: center;
+    margin-top: 27%;
+    padding: 0;
+
     li {
       height: 12vh;
       color: #ffffff;

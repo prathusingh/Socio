@@ -13,6 +13,7 @@ import Feed from './components/feed/Feed';
 import { ForgotPasswordForm } from './components/forgot-password/ForgotPassword';
 import { ResetPasswordForm } from './components/forgot-password/ResetPassword';
 import ProfileForm from './components/profile/Profile';
+import './styles/_base.scss';
 
 ReactDOM.render(
   <Provider store={store}>

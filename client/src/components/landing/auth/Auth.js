@@ -30,7 +30,7 @@ class Auth extends Component {
       <div className="auth">
         <div class="login">
           <Link to="/login">
-            <button name="Login" type="button">
+            <button name="Login" type="button" className="small-btn">
               Log in
             </button>
           </Link>
@@ -45,7 +45,7 @@ class Auth extends Component {
           <section>
             <h3>Join Socio today.</h3>
             <Link to="/signup">
-              <button name="Signup" type="button">
+              <button name="Signup" type="button" class="wide-btn">
                 Sign up
               </button>
             </Link>

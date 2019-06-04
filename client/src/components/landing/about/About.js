@@ -15,7 +15,7 @@ export class About extends Component {
           </li>
           <li>
             <FontAwesomeIcon icon={faAd} />
-            <span>Sell/Buy from neighbourhood.</span>
+            <span>Sell/Buy from your neighbourhood.</span>
           </li>
           <li>
             <FontAwesomeIcon icon={faQuestion} />
