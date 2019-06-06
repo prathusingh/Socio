@@ -7,34 +7,31 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import { loginUser } from '../../actions/authActions';
+import './Login.scss';
 
 const Login = ({ values, errors, touched, serverErrors }) => {
   return (
-    <Form className="Login">
-      {serverErrors.error && <p>{serverErrors.error}</p>}
-      {touched.email && errors.email && <p>{errors.email}</p>}
-      <Field name="email" type="email" placeholder="Email" />
-      {touched.password && errors.password && <p>{errors.password}</p>}
-      <Field name="password" type="password" placeholder="Password" />
-      <button type="submit" name="login">
-        Log in
-      </button>
-      <section className="Login-extras">
-        <label>
-          <Field
-            type="checkbox"
-            name="remember"
-            id="rememberMe"
-            checked={values.remember}
-          />
-          Remember me
-        </label>
-        <span>.</span>
-        <Link to="/forgotpassword">
-          <span>Forgot password?</span>
-        </Link>
+    <div className="login-form">
+      <section>
+        <h1>Socio</h1>
+        <p>Welcome back</p>
+        <Form>
+          <div className="credentials">
+            {serverErrors.error && <p>{serverErrors.error}</p>}
+            <Field name="email" type="email" placeholder="Email" />
+            {touched.email && errors.email && <p>{errors.email}</p>}
+            <Field name="password" type="password" placeholder="Password" />
+            {touched.password && errors.password && <p>{errors.password}</p>}
+            <button type="submit" name="login" className="wide-btn auth-btn">
+              Log in
+            </button>
+            <Link to="/forgotpassword">
+              <span>Forgot password?</span>
+            </Link>
+          </div>
+        </Form>
       </section>
-    </Form>
+    </div>
   );
 };
 

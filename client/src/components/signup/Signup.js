@@ -6,23 +6,39 @@ import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import { registerUser } from '../../actions/authActions';
+import './Signup.scss';
 
 const Signup = ({ errors, touched, serverErrors }) => {
   return (
-    <Form>
-      {serverErrors.error && <p>{serverErrors.error}</p>}
-      {touched.name && errors.name && <p>{errors.name}</p>}
-      <Field name="name" type="text" placeholder="Full Name" />
-      {touched.email && errors.email && <p>{errors.email}</p>}
-      <Field name="email" type="email" placeholder="Email" />
-      {touched.password && errors.password && <p>{errors.password}</p>}
-      <Field name="password" type="password" placeholder="Password" />
-      {touched.repassword && errors.repassword && <p>{errors.repassword}</p>}
-      <Field name="repassword" type="password" placeholder="Reenter Password" />
-      <button type="Submit" name="Signup">
-        Signup
-      </button>
-    </Form>
+    <div className="signup-form">
+      <section>
+        <h1>Socio</h1>
+        <p>Embrace your life where you live after work !</p>
+
+        <Form>
+          <div className="credentials">
+            {serverErrors.error && <p>{serverErrors.error}</p>}
+            <Field name="name" type="text" placeholder="Full Name" />
+            {touched.name && errors.name && <p>{errors.name}</p>}
+            <Field name="email" type="email" placeholder="Email" />
+            {touched.email && errors.email && <p>{errors.email}</p>}
+            <Field name="password" type="password" placeholder="Password" />
+            {touched.password && errors.password && <p>{errors.password}</p>}
+            <Field
+              name="repassword"
+              type="password"
+              placeholder="Reenter Password"
+            />
+            {touched.repassword && errors.repassword && (
+              <p>{errors.repassword}</p>
+            )}
+            <button type="Submit" name="Signup" className="wide-btn auth-btn">
+              Signup
+            </button>
+          </div>
+        </Form>
+      </section>
+    </div>
   );
 };
 

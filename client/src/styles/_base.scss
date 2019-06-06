@@ -14,3 +14,31 @@
   font: 14px Helevetica Neue;
   border: 1px solid #1da1f2;
 }
+
+.credentials {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+
+  & > * {
+    margin-bottom: 5%;
+  }
+
+  a {
+    text-decoration: none;
+    color: #1da1f2;
+  }
+
+  input {
+    padding: 4%;
+    border-radius: 0.5rem;
+    border: 1px solid #1da1f2;
+    font-style: italic;
+    font-size: 15px;
+  }
+}
+
+.auth-btn {
+  margin-left: 22%;
+  border-radius: 0.5rem;
+}
