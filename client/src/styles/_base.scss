@@ -18,7 +18,6 @@
 .credentials {
   display: flex;
   flex-direction: column;
-  width: 25rem;
 
   & > * {
     margin-bottom: 5%;
@@ -35,6 +34,14 @@
     border: 1px solid #1da1f2;
     font-style: italic;
     font-size: 15px;
+    width: 25rem;
+  }
+
+  .error {
+    margin: 0;
+    color: red;
+    text-align: left;
+    margin-top: 0.5rem;
   }
 }
 

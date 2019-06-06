@@ -14,24 +14,37 @@ const Signup = ({ errors, touched, serverErrors }) => {
       <section>
         <h1>Socio</h1>
         <p>Embrace your life where you live after work !</p>
-
         <Form>
           <div className="credentials">
             {serverErrors.error && <p>{serverErrors.error}</p>}
-            <Field name="name" type="text" placeholder="Full Name" />
-            {touched.name && errors.name && <p>{errors.name}</p>}
-            <Field name="email" type="email" placeholder="Email" />
-            {touched.email && errors.email && <p>{errors.email}</p>}
-            <Field name="password" type="password" placeholder="Password" />
-            {touched.password && errors.password && <p>{errors.password}</p>}
-            <Field
-              name="repassword"
-              type="password"
-              placeholder="Reenter Password"
-            />
-            {touched.repassword && errors.repassword && (
-              <p>{errors.repassword}</p>
-            )}
+            <div>
+              <Field name="name" type="text" placeholder="Full Name" />
+              {touched.name && errors.name && (
+                <p className="error">{errors.name}</p>
+              )}
+            </div>
+            <div>
+              <Field name="email" type="email" placeholder="Email" />
+              {touched.email && errors.email && (
+                <p className="error">{errors.email}</p>
+              )}
+            </div>
+            <div>
+              <Field name="password" type="password" placeholder="Password" />
+              {touched.password && errors.password && (
+                <p className="error">{errors.password}</p>
+              )}
+            </div>
+            <div>
+              <Field
+                name="repassword"
+                type="password"
+                placeholder="Reenter Password"
+              />
+              {touched.repassword && errors.repassword && (
+                <p className="error">{errors.repassword}</p>
+              )}
+            </div>
             <button type="Submit" name="Signup" className="wide-btn auth-btn">
               Signup
             </button>

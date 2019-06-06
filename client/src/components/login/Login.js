@@ -18,10 +18,18 @@ const Login = ({ values, errors, touched, serverErrors }) => {
         <Form>
           <div className="credentials">
             {serverErrors.error && <p>{serverErrors.error}</p>}
-            <Field name="email" type="email" placeholder="Email" />
-            {touched.email && errors.email && <p>{errors.email}</p>}
-            <Field name="password" type="password" placeholder="Password" />
-            {touched.password && errors.password && <p>{errors.password}</p>}
+            <div>
+              <Field name="email" type="email" placeholder="Email" />
+              {touched.email && errors.email && (
+                <p className="error">{errors.email}</p>
+              )}
+            </div>
+            <div>
+              <Field name="password" type="password" placeholder="Password" />
+              {touched.password && errors.password && (
+                <p className="error">{errors.password}</p>
+              )}
+            </div>
             <button type="submit" name="login" className="wide-btn auth-btn">
               Log in
             </button>
