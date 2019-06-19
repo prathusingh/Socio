@@ -21,7 +21,6 @@ router.post('/register', (req, res) => {
 
   // Check whether user exists
   User.findOne({ email }).then(user => {
-    console.log(user);
     if (user) {
       res.status(401).json({ error: errorCodes.emailExists });
     } else {
@@ -38,7 +37,6 @@ router.post('/register', (req, res) => {
             res.status(500).json({ error: errorCodes.internalError });
           }
           newUser.password = hash;
-          console.log(user);
 
           // save new user
           newUser
