@@ -76,7 +76,11 @@ module.exports = env => {
           {
             from: path.join(__dirname, '../public'),
             to: 'public',
-            toType: 'dir'
+            toType: 'dir',
+            ignore: ['index.html']
+          },
+          {
+            from: path.join(__dirname, '../_redirects')
           }
         ])
       ]
