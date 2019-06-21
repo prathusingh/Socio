@@ -39,6 +39,7 @@ mongoose
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'index.html'));
 });
+
 // Passport middleware
 app.use(passport.initialize());
 
