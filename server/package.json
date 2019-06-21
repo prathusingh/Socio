@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "heroku-prebuild": "rimraf dist/ && babel ./src/ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./package-lock.json,./.env --copy-files ./.babelrc",
+    "heroku-postbuild": "rimraf dist/ && babel ./src/ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./package-lock.json,./.env --copy-files ./.babelrc",
     "start": "node ./dist/index.js",
     "start-dev": "NODE_ENV=dev nodemon --inspect --exec babel-node ./src/index.js"
   },
