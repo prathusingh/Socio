@@ -6,7 +6,6 @@ import db from './config/keys';
 import users from './routes/api/users';
 import tokenAuthentication from './config/passport';
 import cors from 'cors';
-import path from 'path';
 
 const app = express();
 
@@ -35,10 +34,6 @@ mongoose
     console.log('DB connected');
   })
   .catch(err => console.log(err));
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'index.html'));
-});
 
 // Passport middleware
 app.use(passport.initialize());
