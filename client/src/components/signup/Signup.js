@@ -17,7 +17,9 @@ const Signup = ({ errors, status, touched, serverErrors }) => {
         <p>Embrace your life where you live after work !</p>
         <Form>
           <div className="credentials">
-            {serverErrors.error && <p>{serverErrors.error}</p>}
+            {serverErrors.error && (
+              <p className="error">{serverErrors.error}</p>
+            )}
             <div>
               <Field name="name" type="text" placeholder="Full Name" />
               {touched.name && errors.name && (
@@ -48,7 +50,7 @@ const Signup = ({ errors, status, touched, serverErrors }) => {
             </div>
             <button type="Submit" name="Signup" className="wide-btn auth-btn">
               Signup
-              {status.isClicked ? <Spinner /> : null}
+              {status.isClicked && !serverErrors.error ? <Spinner /> : null}
             </button>
           </div>
         </Form>

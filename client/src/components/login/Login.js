@@ -18,11 +18,13 @@ const Login = ({ values, status, errors, touched, serverErrors }) => {
         <p>Welcome back</p>
         <Form>
           <div className="credentials">
-            {serverErrors.error && <p>{serverErrors.error}</p>}
+            {serverErrors.error && (
+              <p className="error">{serverErrors.error}</p>
+            )}
             <div>
               <Field name="email" type="email" placeholder="Email" />
               {touched.email && errors.email && (
-                <p className="error">{errors.email}</p>
+                <p className="error server-error">{errors.email}</p>
               )}
             </div>
             <div>
@@ -33,7 +35,7 @@ const Login = ({ values, status, errors, touched, serverErrors }) => {
             </div>
             <button type="submit" name="login" className="wide-btn auth-btn">
               Log in
-              {status.isClicked ? <Spinner /> : null}
+              {status.isClicked && !serverErrors.error ? <Spinner /> : null}
             </button>
             <Link to="/forgotpassword">
               <span>Forgot password?</span>
@@ -60,10 +62,10 @@ const formikEnhancer = withFormik({
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .email()
-      .required('Did you forget to enter email'),
+      .required('Did you forget to enter email?'),
     password: Yup.string()
       .min(8, 'Please enter password greater than 8 characters')
-      .required('Did you forget to enter password')
+      .required('Did you forget to enter password?')
   }),
   handleSubmit(values, { props, setStatus }) {
     const loggingUser = {
