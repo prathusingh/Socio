@@ -6,9 +6,10 @@ import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import { registerUser } from '../../actions/authActions';
+import { Spinner } from '../spinner/Spinner';
 import './Signup.scss';
 
-const Signup = ({ errors, touched, serverErrors }) => {
+const Signup = ({ errors, status, touched, serverErrors }) => {
   return (
     <div className="signup-form">
       <section>
@@ -47,6 +48,7 @@ const Signup = ({ errors, touched, serverErrors }) => {
             </div>
             <button type="Submit" name="Signup" className="wide-btn auth-btn">
               Signup
+              {status.isClicked ? <Spinner /> : null}
             </button>
           </div>
         </Form>
@@ -64,6 +66,11 @@ const formikEnhancer = withFormik({
       repassword: ''
     };
   },
+  mapPropsToStatus() {
+    return {
+      isClicked: false
+    };
+  },
   validationSchema: Yup.object().shape({
     name: Yup.string().required('Did you forget to enter name'),
     email: Yup.string()
@@ -76,12 +83,15 @@ const formikEnhancer = withFormik({
       .oneOf([Yup.ref('password')], 'Password does not match')
       .required('Please reenter password')
   }),
-  handleSubmit: (values, { props }) => {
+  handleSubmit: (values, { props, setStatus }) => {
     const signingUser = {
       name: values.name,
       email: values.email,
       password: values.password
     };
+
+    setStatus({ isClicked: true });
+
     props.dispatch(registerUser(signingUser, props.history));
   }
 })(Signup);

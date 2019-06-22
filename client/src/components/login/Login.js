@@ -7,9 +7,10 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import { loginUser } from '../../actions/authActions';
+import { Spinner } from '../spinner/Spinner';
 import './Login.scss';
 
-const Login = ({ values, errors, touched, serverErrors }) => {
+const Login = ({ values, status, errors, touched, serverErrors }) => {
   return (
     <div className="login-form">
       <section>
@@ -32,6 +33,7 @@ const Login = ({ values, errors, touched, serverErrors }) => {
             </div>
             <button type="submit" name="login" className="wide-btn auth-btn">
               Log in
+              {status.isClicked ? <Spinner /> : null}
             </button>
             <Link to="/forgotpassword">
               <span>Forgot password?</span>
@@ -47,8 +49,12 @@ const formikEnhancer = withFormik({
   mapPropsToValues() {
     return {
       email: '',
-      password: '',
-      remember: true
+      password: ''
+    };
+  },
+  mapPropsToStatus() {
+    return {
+      isClicked: false
     };
   },
   validationSchema: Yup.object().shape({
@@ -59,11 +65,14 @@ const formikEnhancer = withFormik({
       .min(8, 'Please enter password greater than 8 characters')
       .required('Did you forget to enter password')
   }),
-  handleSubmit(values, { props }) {
+  handleSubmit(values, { props, setStatus }) {
     const loggingUser = {
       email: values.email,
       password: values.password
     };
+
+    setStatus({ isClicked: true });
+
     props.dispatch(loginUser(loggingUser, props.history));
   }
 })(Login);
