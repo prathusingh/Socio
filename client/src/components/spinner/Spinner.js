@@ -5,7 +5,7 @@ import './Spinner.scss';
 
 export function Spinner() {
   return (
-    <span>
+    <span class="spinner">
       <FontAwesomeIcon icon={faSpinner} />
     </span>
   );
