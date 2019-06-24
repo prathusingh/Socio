@@ -28,14 +28,14 @@ class Auth extends Component {
   render() {
     return (
       <div className="auth">
-        <div class="login">
+        <div className="login">
           <Link to="/login">
             <button name="Login" type="button" className="small-btn">
               Log in
             </button>
           </Link>
         </div>
-        <div class="signup">
+        <div className="signup">
           <section>
             <h2>Embrace your daily routine outside work !</h2>
             <h3>Join Socio today.</h3>
