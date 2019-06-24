@@ -37,10 +37,10 @@ export const loginUser = (userData, history) => dispatch => {
       // set current user
       dispatch(setCurrentUser(decoded));
 
-      // redirect to current user home page
       setTimeout(() => {
+        window.history.replaceState({}, '', '/home');
+        // redirect to current user home page
         history.push('./home');
-        window.history.replaceState(window.history.location);
       }, 0);
     })
     .catch(err =>
