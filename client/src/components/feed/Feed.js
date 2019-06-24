@@ -4,6 +4,7 @@ import { logoutUser } from '../../actions/authActions';
 
 export default class Feed extends React.Component {
   handleLogout = () => {
+    localStorage.removeItem('jwtToken');
     this.props.dispatch(logoutUser());
     this.props.history.push('./login');
   };
