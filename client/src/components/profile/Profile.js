@@ -22,7 +22,10 @@ class Profile extends React.Component {
     return (
       <div className="profile">
         <Form>
-          <h1>Update Profile</h1>
+          <h1>
+            {this.props.auth.user.name}!, You are at the right place to update
+            your profile
+          </h1>
           <section>
             {this.props.touched.name && this.props.errors.name && (
               <p>{this.props.errors.name}</p>

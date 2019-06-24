@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Auth from '../../landing/auth/Auth';
 
 export default ComposedComponent => {
   class Authentication extends React.Component {
