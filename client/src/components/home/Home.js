@@ -2,7 +2,7 @@ import React from 'react';
 
 import { logoutUser } from '../../actions/authActions';
 
-export default class Feed extends React.Component {
+export default class Home extends React.Component {
   handleLogout = () => {
     localStorage.removeItem('jwtToken');
     this.props.dispatch(logoutUser());

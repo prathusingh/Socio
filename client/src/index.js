@@ -9,7 +9,7 @@ import './index.scss';
 import App from './App';
 import { LoginForm } from './components/login/Login';
 import { SignupForm } from './components/signup/Signup';
-import Feed from './components/feed/Feed';
+import Home from './components/home/Home';
 import { ForgotPasswordForm } from './components/forgot-password/ForgotPassword';
 import { ResetPasswordForm } from './components/forgot-password/ResetPassword';
 import ProfileForm from './components/profile/Profile';
@@ -23,7 +23,7 @@ ReactDOM.render(
         <Route exact path="/" component={App} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/signup" component={SignupForm} />
-        <Route path="/feed" component={requireAuth(Feed)} />
+        <Route path="/home" component={requireAuth(Home)} />
         <Route path="/forgotpassword" component={ForgotPasswordForm} />
         <Route
           exact
