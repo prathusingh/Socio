@@ -53,8 +53,6 @@ export const loginGoogleAuthUser = (userData, history) => dispatch => {
   fetch(`${process.env.API_PREFIX}/auth/google/token`, userData)
     .then(res => res.json())
     .then(res => {
-      // save to local storage
-      console.log(res);
       const { token } = res;
       localStorage.setItem('jwtToken', token);
 

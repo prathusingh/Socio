@@ -13,6 +13,7 @@ import Feed from './components/feed/Feed';
 import { ForgotPasswordForm } from './components/forgot-password/ForgotPassword';
 import { ResetPasswordForm } from './components/forgot-password/ResetPassword';
 import ProfileForm from './components/profile/Profile';
+import requireAuth from './components/HOC/require-auth/RequireAuth';
 import './styles/_base.scss';
 
 ReactDOM.render(
@@ -22,14 +23,14 @@ ReactDOM.render(
         <Route exact path="/" component={App} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/signup" component={SignupForm} />
-        <Route exact path="/feed" component={Feed} />
+        <Route path="/feed" component={requireAuth(Feed)} />
         <Route path="/forgotpassword" component={ForgotPasswordForm} />
         <Route
           exact
           path="/resetpassword/:token"
           component={ResetPasswordForm}
         />
-        <Route exact path="/profile" component={ProfileForm} />
+        <Route exact path="/profile" component={requireAuth(ProfileForm)} />
       </div>
     </Router>
   </Provider>,
