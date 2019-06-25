@@ -8,9 +8,8 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       show: false,
-      timerCount: 0,
-      inactivityThreshold: 100000,
-      timer: null
+      inactivityThreshold: 10000,
+      timer: undefined
     };
   }
 
@@ -21,14 +20,14 @@ export default class Home extends React.Component {
   };
 
   startTimer() {
-    if (this.state.timer !== null) {
+    if (typeof this.state.timer !== 'undefined') {
       clearTimeout(this.state.timer);
     }
-    this.setState({
-      timer: setTimeout(() => {
-        this.showModal();
-      }, this.inactivityThreshold)
-    });
+    const newTimer = setTimeout(() => {
+      this.showModal();
+    }, this.state.inactivityThreshold);
+
+    this.setState({ timer: newTimer });
   }
 
   componentWillMount() {
@@ -57,8 +56,8 @@ export default class Home extends React.Component {
         <SessionTimeoutModal
           show={this.state.show}
           handleContinue={this.hideModal}
-          handleLogout={this.logoutUser}
-          threshold={this.threshold}
+          handleLogout={this.handleLogout}
+          inactivityThreshold={this.inactivityThreshold}
         >
           <p>You are being timedoff due to inactivity.</p>
           <p>Please choose to stay signed in or to logoff.</p>

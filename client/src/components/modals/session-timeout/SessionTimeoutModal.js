@@ -2,35 +2,52 @@ import React from 'react';
 import './SessionTimeoutModal.scss';
 
 export class SessionTimeoutModal extends React.Component {
-  constructor({ handleContinue, handleLogout, show, threshold, children }) {
-    super({ handleContinue, handleLogout, show, threshold, children });
+  modalThreshold = 20000;
+  constructor(props) {
+    super(props);
     this.state = {
-      currentTimerCount: 0
+      timerCount: 0,
+      modalTimer: undefined
     };
   }
 
   componentWillMount() {
-    setInterval(() => {
-      this.setState({ currentTimerCount: this.state.currentTimerCount + 1 });
+    if (typeof this.state.modalTimer !== 'undefined') {
+      clearTimeout(this.state.modalTimer);
+    }
 
-      if (this.state.currentTimerCount === this.threshold) {
+    const newTimer = setInterval(() => {
+      if (this.props.show) {
+        this.setState({ timerCount: this.state.timerCount + 1 });
+      }
+
+      if (this.state.timerCount * 1000 === this.modalThreshold) {
         // automatically logged out
-        this.handleLogout();
+        this.props.handleLogout();
       }
     }, 1000);
+
+    this.setState({ modalTimer: newTimer });
   }
+
+  componentWillUnmount() {
+    if (typeof this.state.modalTimer !== 'undefined') {
+      clearTimeout(this.state.modalTimer);
+    }
+  }
+
   render() {
-    const showHideClassName = show
+    const showHideClassName = this.props.show
       ? 'modal display-block'
       : 'modal display-none';
 
     return (
-      <div className={this.showHideClassName}>
+      <div className={showHideClassName}>
         <section className="modal-main">
-          {this.children}
-          <button onClick={this.handleContinue}>Stay Logged In</button>
-          <button onClick={this.handleLogout}>
-            Logout (<span>{this.state.currentTimerCount}</span>)
+          {this.props.children}
+          <button onClick={this.props.handleContinue}>Stay Logged In</button>
+          <button onClick={this.props.handleLogout}>
+            Logout in (<span>{this.state.timerCount} secs</span>)
           </button>
         </section>
       </div>
