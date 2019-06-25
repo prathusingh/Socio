@@ -7,7 +7,7 @@ export class SessionManager extends React.Component {
     super(props);
     this.state = {
       show: false,
-      inactivityThreshold: 10000,
+      inactivityThreshold: 3600000, // 1 hour
       timer: undefined
     };
   }
