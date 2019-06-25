@@ -2,6 +2,7 @@ import React from 'react';
 import './Profile.scss';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { SessionManager } from '../session-manager/SessionManager';
 
 class Profile extends React.Component {
   constructor(props) {
