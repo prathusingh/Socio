@@ -40,7 +40,7 @@ export const loginUser = (userData, history) => dispatch => {
       setTimeout(() => {
         window.history.replaceState({}, '', '/home');
         // redirect to current user home page
-        history.push('./profile');
+        history.push('./home');
       }, 0);
     })
     .catch(err =>
