@@ -40,7 +40,7 @@ export const loginUser = (userData, history) => dispatch => {
       setTimeout(() => {
         window.history.replaceState({}, '', '/home');
         // redirect to current user home page
-        history.push('./home');
+        history.push('./profile');
       }, 0);
     })
     .catch(err =>
@@ -69,7 +69,7 @@ export const loginGoogleAuthUser = (userData, history) => dispatch => {
       dispatch(setCurrentUser(decoded));
 
       // redirect to current user home page
-      history.push('./feed');
+      history.push('./home');
     })
     .catch(err => {
       dispatch({

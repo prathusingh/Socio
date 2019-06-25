@@ -69,18 +69,13 @@ class Profile extends React.Component {
             <button type="submit">Update</button>
           </section>
         </Form>
+        <SessionManager {...this.props} />
       </div>
     );
   }
 }
 
 const ProfileForm = withFormik({
-  mapPropsToValues() {
-    return {
-      name: '',
-      unit: ''
-    };
-  },
   validationSchema: Yup.object().shape({
     name: Yup.string().required('Did you forget to enter name')
   })
