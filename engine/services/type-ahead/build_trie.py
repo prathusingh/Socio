@@ -1,12 +1,17 @@
+from prefix_hashtree import PrefixHashTree
+
+
 class Node():
     def __init__(self, val):
         self.val = val
         self.child_list = []
 
 
-class BuildTrie():
-    def __init__(self):
+class Storage():
+    def __init__(self, data):
         self.root = Node('root')
+        self.build_trie(data)
+        self.prefix_storage = PrefixHashTree(self.root)
 
     @staticmethod
     def getPrefix(node_list, prefix_node):
