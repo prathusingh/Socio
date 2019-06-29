@@ -11,7 +11,7 @@ class PrefixHashTree:
     def build_prefix_storage(self, node):
         if len(node.child_list) is 0:
             return
-        self.storage[node.val] = node.child_list
+        self.storage[node.val] = [node.val for node in node.child_list]
         for node in node.child_list:
             self.build_prefix_storage(node)
 

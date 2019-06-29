@@ -40,3 +40,5 @@ class Storage():
                 current_node = node_to_insert
             else:
                 current_node = prefix_found
+
+        current_node.child_list.append(Node(None))
