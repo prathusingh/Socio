@@ -5,9 +5,8 @@ class PrefixHashTree:
         self.root_node = root_node
         self.build_prefix_storage(self.root_node)
 
-    # the disadvantage here is theat we are repeating items for different prefix
+    # the disadvantage here is that we are repeating items for different prefix
     # but would sacrifice it for O(1) time complexity
-
     def build_prefix_storage(self, node):
         if len(node.child_list) is 0:
             return
