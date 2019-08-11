@@ -28,8 +28,6 @@ START_DB_SERVER() {
 
 
 KILL_EXISITING_PROCESS() {
-    CLIENT_PORT=8081
-    DB_PORT=
     kill -9 $(lsof -t -i:$1)
     kill -9 $(lsof -t -i:$2)
     kill -9 $(lsof -t -i:$3)
