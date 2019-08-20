@@ -5,18 +5,30 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 import { forgotPassword } from '../../actions/authActions';
+import './ForgotPassword.scss';
 
 const ForgotPassword = ({ errors, touched, serverErrors, auth }) => {
   return (
-    <Form className="Forgot-password">
-      {serverErrors.error && <p>{serverErrors.error}</p>}
-      {touched.email && errors.email && <p>{errors.email}</p>}
-      <Field name="email" type="email" placeholder="Email" />
-      <button type="submit" name="reset">
-        Reset it
-      </button>
-      {auth.systemMessage && <p>{auth.systemMessage}</p>}
-    </Form>
+    <div className="forgotpassword-form">
+      <section>
+        <h1>No worries! We will find your Socio account</h1>
+        <Form>
+          <div className="credentials">
+            {serverErrors.error && <p>{serverErrors.error}</p>}
+            {touched.email && errors.email && <p>{errors.email}</p>}
+            <Field
+              name="email"
+              type="email"
+              placeholder="Please enter your email"
+            />
+          </div>
+          <button type="submit" name="reset" className="medium-btn auth-btn">
+            Search
+          </button>
+          {auth.systemMessage && <p>{auth.systemMessage}</p>}
+        </Form>
+      </section>
+    </div>
   );
 };
 
