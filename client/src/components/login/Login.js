@@ -23,13 +23,13 @@ const Login = ({ values, status, errors, touched, serverErrors }) => {
             )}
             <div>
               <Field name="email" type="email" placeholder="Email" />
-              {status.isClicked && touched.email && errors.email && (
+              {touched.email && errors.email && (
                 <p className="error server-error">{errors.email}</p>
               )}
             </div>
             <div>
               <Field name="password" type="password" placeholder="Password" />
-              {status.isClicked && touched.password && errors.password && (
+              {touched.password && errors.password && (
                 <p className="error">{errors.password}</p>
               )}
             </div>
