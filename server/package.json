@@ -24,7 +24,7 @@
     "express": "^4.16.4",
     "googleapis": "^38.0.0",
     "i": "^0.3.6",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^3.2.3",
     "mongoose": "^5.4.13",
     "node-mailer": "^0.1.1",
